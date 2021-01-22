@@ -3,6 +3,7 @@ package com.fishyRestaurant.billing.domain;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "orders")
@@ -34,5 +35,68 @@ public class Orders {
         this.invoiced = invoiced;
         this.chargedDate = chargedDate;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public boolean isInvoiced() {
+        return invoiced;
+    }
+
+    public void setInvoiced(boolean invoiced) {
+        this.invoiced = invoiced;
+    }
+
+    public OffsetDateTime getChargedDate() {
+        return chargedDate;
+    }
+
+    public void setChargedDate(OffsetDateTime chargedDate) {
+        this.chargedDate = chargedDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final Orders order = (Orders) o;
+        return Objects.equals(getId(), order.getId())
+          && Objects.equals(getAccountNumber(), order.getAccountNumber())
+          && Objects.equals(getAmount(), order.getAmount())
+          && Objects.equals(getChargedDate(), order.getChargedDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getAccountNumber(), getAmount(), getChargedDate());
+    }
+
+    @Override
+    public String toString() {
+        return "Order{ " +
+          "id=" + getId() + '\'' +
+          ", accountNumber=" + getAccountNumber() + '\'' +
+          ", amount= " + getAmount() + '\'' +
+          ", chargedDate=" + getChargedDate() + '\'' +
+          '}';
+    }
+
 
 }
